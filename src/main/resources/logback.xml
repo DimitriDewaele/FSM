@@ -1,0 +1,43 @@
+<configuration debug="false">
+ 
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- Short readable messages for the console -->
+            <Pattern>%msg%n</Pattern>
+        </layout>
+    </appender>
+  
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/file.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Roll every second: {yyyy-MM-dd_HH-mm-ss} -->
+            <!-- Roll every day: {yyyy-MM-dd} -->
+            <fileNamePattern>log/file.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <!-- SizeAndTime: Split log-file when size is reached + zip + add index (%i) -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 history files, in this case: for 30 days - files older dan 30 days are deleted -->
+            <!-- There is no limit - even 300 seems to work. -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} - %-5level - %logger - %msg%n</Pattern>
+        </encoder>
+    </appender>
+         
+    <!-- Show cyberlab info in the console -->
+    <logger name="Console" level="info" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    
+    <logger name="be.softwarelab" level="debug"/>
+    <logger name="org.apache" level="info"/>
+    <logger name="org.apache.activemq" level="info"/>
+    <logger name="org.apache.http" level="info"/>
+    
+    <!-- Root: log all to file -->
+    <root level="debug">
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
