@@ -66,7 +66,7 @@ public class FSM {
             }
         }
 
-        System.out.println("FSM: stop");
+        CONSOLE.info("FSM: stop");
         System.exit(0);
     }
 
