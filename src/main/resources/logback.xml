@@ -26,7 +26,7 @@
         </encoder>
     </appender>
          
-    <!-- Show cyberlab info in the console -->
+    <!-- Show info in the console -->
     <logger name="Console" level="info" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
