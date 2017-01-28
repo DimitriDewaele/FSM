@@ -2,6 +2,8 @@
 
 WIP of FSM
 
+==> Can be opened in netbeans
+
 ## FSM
 
 Add diagram
